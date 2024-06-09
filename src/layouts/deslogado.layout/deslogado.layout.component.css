@@ -1,0 +1,5 @@
+content {
+    flex: 1 1 auto;
+    /* Para que crie um scroll no content, assim os módulos podem usar o height 100% para chegar no tamanho da tela */
+    overflow-y: auto;
+}

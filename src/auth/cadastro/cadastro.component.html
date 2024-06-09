@@ -1,9 +1,13 @@
 <div class="h-100 d-flex align-items-center justify-content-center">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">Login</h4>
+            <h4 class="card-title">Cadastro</h4>
         </div>
         <div class="card-body">
+            <div class="form-floating mb-3">
+                <input type="text" required #inputNome id="input-nome" class="form-control" [(ngModel)]="nome" placeholder=".">
+                <label for="input-nome">Nome</label>
+            </div>
             <div class="form-floating mb-3">
                 <input type="email" required #inputLogin id="input-login" class="form-control" [(ngModel)]="login" placeholder=".">
                 <label for="input-login">Login</label>
@@ -12,9 +16,9 @@
                 <input type="password" required #inputSenha id="input-senha" class="form-control" [(ngModel)]="senha" placeholder=".">
                 <label for="input-senha">Senha</label>
             </div>
-        </div>
-        <div class="card-footer text-end">
-            <button class="btn btn-primary" (click)="confirm(inputLogin, inputSenha)">Login</button>
+
+            <div class="card-footer text-end">
+                <button class="btn btn-primary" (click)="confirm(inputNome, inputLogin, inputSenha)">Confirmar</button>
+            </div>
         </div>
     </div>
-</div>
