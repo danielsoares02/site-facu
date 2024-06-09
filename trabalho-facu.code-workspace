@@ -1,0 +1,23 @@
+{
+    "folders": [
+        {
+            "path": "src"
+        },
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "CSSNavigation.excludeGlobPatterns": [
+            "**/node_modules/**",
+            "**/bower_components/**",
+            "**/vendor/**",
+            "**/coverage/**",
+            "**/dist/**"
+        ],
+        "CSSNavigation.alwaysIncludeGlobPatterns": [
+            "**/node_modules/bootstrap/dist/css/bootstrap.css",
+            "**/node_modules/bootstrap-icons/font/bootstrap-icons.css",
+        ],
+    }
+}
