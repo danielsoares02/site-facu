@@ -1,0 +1,25 @@
+<div class="h-100 d-flex align-items-center justify-content-center">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Novo anúncio</h4>
+        </div>
+        <div class="card-body">
+            <div class="form-floating mb-3">
+                <input type="text" required #inputTitulo id="input-titulo" class="form-control" [(ngModel)]="titulo" placeholder=".">
+                <label for="input-titulo">Titulo</label>
+            </div>
+            <div class="form-floating mb-3">
+                <textarea required rows="4" #textDesc id="text-desc" class="form-control" [(ngModel)]="descricao" placeholder="."></textarea>
+                <label for="text-desc">Descricao</label>
+            </div>
+            <div class="form-floating">
+                <input type="number" #inputValor id="input-valor" class="form-control" [(ngModel)]="valor" placeholder=".">
+                <label for="input-valor">Valor</label>
+            </div>
+
+        </div>
+        <div class="card-footer text-end">
+            <button class="btn btn-primary" (click)="confirm(inputTitulo, textDesc)">Confirmar</button>
+        </div>
+    </div>
+</div>

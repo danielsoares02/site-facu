@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
-    selector: 'app-deslogado.layout',
+    selector: 'app-profile.layout',
     standalone: true,
     imports: [RouterOutlet, RouterLink],
-    templateUrl: './deslogado.layout.component.html',
-    styleUrl: './deslogado.layout.component.css'
+    templateUrl: './profile.layout.component.html',
+    styleUrl: './profile.layout.component.css'
 })
-export class DeslogadoLayoutComponent {
+export default class ProfileLayoutComponent {
 
 }

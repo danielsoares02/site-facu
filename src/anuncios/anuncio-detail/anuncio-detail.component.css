@@ -1,0 +1,8 @@
+.anuncio-detail {
+    height: 20rem;
+
+    .image {
+        width: 40%;
+        height: 20rem;
+    }
+}

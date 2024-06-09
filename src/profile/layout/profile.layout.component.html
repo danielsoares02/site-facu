@@ -1,0 +1,20 @@
+<div class="position-absolute h-100 w-100">
+    <div class="d-flex flex-row h-100">
+        <div class="sidemenu p-3">
+            <div class="d-flex flex-column">
+                <div class="d-flex flex-column">
+                    <!-- <img src="assets/img/profile.png" class="rounded-circle" width="100" height="100" /> -->
+                    <h4>Nome do usuário</h4>
+                    <p>Email do usuário</p>
+                </div>
+                <div class="d-flex flex-column">
+                    <a [routerLink]="['meus-dados']">Meus Dados</a>
+                    <a [routerLink]="['meus-anuncios']">Meus Anúncios</a>
+                </div>
+            </div>
+        </div>
+        <content class="w-100">
+            <router-outlet />
+        </content>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="d-flex flex-column justify-content-evenly">
+    <div class="d-flex flex-row flex-wrap">
+        @for (item of [].constructor(10); track $index) {
+        <div class="product-card">
+            <app-anuncio-card />
+        </div>
+        }
+    </div>
+</div>
