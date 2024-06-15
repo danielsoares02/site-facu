@@ -18,10 +18,10 @@ export default class AnuncioDetailComponent implements OnInit{
     usuarioService = inject(ApiUsuarioService);
     
     anuncio = signal<AnuncioModel | undefined>(undefined)
-    usuario = signal<UsuarioModel | undefined>(undefined)
+    anunciante = signal<UsuarioModel | undefined>(undefined)
     
     async ngOnInit() {
         this.anuncio.set(await this.anuncioService.getAnuncio(this.anuncioId));
-        this.usuario.set(await this.usuarioService.getUsuario(this.anuncio()!.anunciante));
+        this.anunciante.set(await this.usuarioService.getUsuario(this.anuncio()!.anunciante));
     }
 }

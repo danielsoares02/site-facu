@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { ApiUsuarioService, LoginModel } from '../../api/api-usuario.service';
+import { ApiUsuarioService, LoginModel, UsuarioModel } from '../../api/api-usuario.service';
 import { Route, UrlSegment } from '@angular/router';
 
 @Injectable({
@@ -24,7 +24,7 @@ export class LoginService {
         return !!localStorage.getItem('login');
     }
 
-    usuarioLogado() {
+    usuarioLogado(): UsuarioModel {
         return JSON.parse(localStorage.getItem('login') || '{}');
     }
 

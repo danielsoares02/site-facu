@@ -2,20 +2,19 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
-import { ApiUsuarioService } from '../../api/api-usuario.service';
+import { ApiUsuarioService, CadastroInicial } from '../../api/api-usuario.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-cadastro',
     standalone: true,
-    imports: [FormsModule],
+    imports: [CommonModule, FormsModule],
     templateUrl: './cadastro.component.html',
     styleUrl: './cadastro.component.css',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class CadastroComponent {
-    nome = signal("")
-    login = signal("")
-    senha = signal("")
+    cadastroInicial = signal<CadastroInicial>({ nome: '', email: '', senha: '', contato: '' })
 
     usuarioService = inject(ApiUsuarioService)
     loginService = inject(LoginService)
@@ -24,9 +23,9 @@ export default class CadastroComponent {
     async confirm(inputNome: HTMLInputElement, inputLogin: HTMLInputElement, inputSenha: HTMLInputElement) {
         if (inputNome.reportValidity() && inputLogin.reportValidity() && inputSenha.reportValidity()) {
             try {
-                await this.usuarioService.cadastrar({ nome: this.nome(), email: this.login(), senha: this.senha() });
+                await this.usuarioService.cadastrar(this.cadastroInicial());
 
-                await this.loginService.login({email: this.login(), senha: this.senha()});
+                await this.loginService.login({email: this.cadastroInicial().email, senha: this.cadastroInicial().senha});
                 
                 this.router.navigateByUrl('/');
 

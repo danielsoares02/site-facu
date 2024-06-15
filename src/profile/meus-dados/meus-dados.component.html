@@ -5,24 +5,26 @@
         </div>
         <div class="card-body">
             <div class="form-floating mb-3">
-                <input type="text" required #inputNome id="input-nome" class="form-control" [(ngModel)]="cadastroInicial().nome" placeholder=".">
+                <input type="text" required #inputNome id="input-nome" class="form-control" [(ngModel)]="usuarioLogado().nome" placeholder=".">
                 <label for="input-nome">Nome</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="email" required #inputLogin id="input-login" class="form-control" [(ngModel)]="cadastroInicial().email" placeholder=".">
+                <input type="email" required #inputLogin id="input-login" class="form-control" [(ngModel)]="usuarioLogado().email" placeholder=".">
                 <label for="input-login">Login</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="password" required #inputSenha id="input-senha" class="form-control" [(ngModel)]="cadastroInicial().senha" placeholder=".">
+                <input type="password" required #inputSenha id="input-senha" class="form-control" [(ngModel)]="usuarioLogado().senha" placeholder=".">
                 <label for="input-senha">Senha</label>
             </div>
+
             <div class="form-floating mb-3">
-                <textarea id="input-contato" class="form-control" [(ngModel)]="cadastroInicial().contato" placeholder="."></textarea>
+                <textarea id="input-contato" class="form-control" [(ngModel)]="usuarioLogado().contato" placeholder="."></textarea>
                 <label for="input-contato">Informações de contato</label>
             </div>
 
             <div class="card-footer text-end">
-                <button class="btn btn-primary" (click)="confirm(inputNome, inputLogin, inputSenha)">Confirmar</button>
+                <button class="btn btn-primary" (click)="confirm(inputNome, inputLogin, inputSenha)">Atualizar</button>
             </div>
         </div>
     </div>
+</div>
