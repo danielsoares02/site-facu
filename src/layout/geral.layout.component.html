@@ -1,0 +1,10 @@
+<div class="position-absolute h-100 w-100">
+    <header class="w-100 d-flex flex-row p-3">
+        <span class="me-3 col-form-label"><a routerLink="/">Inicio</a></span>
+        <input class="form-control" placeholder="Buscar..." (blur)="search(input.value)" (keydown.enter)="input.blur()" #input />
+        <button class="btn bi bi-person" (click)="profileClick()"></button>
+    </header>
+    <content class="w-100">
+        <router-outlet />
+    </content>
+</div>

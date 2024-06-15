@@ -1,4 +1,6 @@
 .product-card {
-    min-width: 15rem;
+    min-width: 30rem;
+    max-width: 30rem;
+    min-height: 30rem;
     padding: 0.5rem;
 }

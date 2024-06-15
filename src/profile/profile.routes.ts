@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { LoginService } from "../auth/services/login.service";
 
 export const profileRoutes: Routes = [
     {

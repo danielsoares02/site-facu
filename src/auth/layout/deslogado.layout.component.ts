@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -6,7 +6,8 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     standalone: true,
     imports: [RouterOutlet, RouterLink],
     templateUrl: './deslogado.layout.component.html',
-    styleUrl: './deslogado.layout.component.css'
+    styleUrl: './deslogado.layout.component.css',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class DeslogadoLayoutComponent {
 

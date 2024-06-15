@@ -1,19 +1,9 @@
 <div class="anuncio-detail d-flex flex-row p-3">
     <div class="image">
-
+        <img [src]="anuncio()?.imagem" alt="Imagem do anúncio" />
     </div>
-    <div class="info">
-        <h1>Titulo</h1>
-        <p>Decrição</p>
-        <p>Valor</p>
-    </div>
-</div>
-
-<div class="message">
-    <div class="new-message">
-        <div class="form-floating">
-            <textarea id="new-message" class="form-control" placeholder="Converse com o vendedor sobre este anúncio, somente você e o vendedor verão esta mensagem"></textarea>
-            <label for="new-message">Deixe sua mensagem</label>
-        </div>
+    <div class="info p-3">
+        <h1>{{anuncio()?.titulo}}</h1>
+        <p>{{anuncio()?.descricao}}</p>
     </div>
 </div>

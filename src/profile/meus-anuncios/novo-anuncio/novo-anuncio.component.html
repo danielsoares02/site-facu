@@ -12,14 +12,13 @@
                 <textarea required rows="4" #textDesc id="text-desc" class="form-control" [(ngModel)]="descricao" placeholder="."></textarea>
                 <label for="text-desc">Descricao</label>
             </div>
-            <div class="form-floating">
-                <input type="number" #inputValor id="input-valor" class="form-control" [(ngModel)]="valor" placeholder=".">
-                <label for="input-valor">Valor</label>
+            <div class="mb-3">
+                <label for="input-imagem">Imagem</label>
+                <input type="file" required #inputImage id="input-imagem" class="form-control" accept="image/*">
             </div>
-
         </div>
         <div class="card-footer text-end">
-            <button class="btn btn-primary" (click)="confirm(inputTitulo, textDesc)">Confirmar</button>
+            <button class="btn btn-primary" (click)="confirm(inputTitulo, textDesc, inputImage)">Confirmar</button>
         </div>
     </div>
 </div>
