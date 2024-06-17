@@ -4,30 +4,60 @@ import { Injectable } from '@angular/core';
     providedIn: 'root'
 })
 export class ApiUsuarioService {
-    async login(login: LoginModel) {
-        const usuarios = JSON.parse(localStorage.getItem('usuarios') ?? "[]") as LoginModel[];
+    async login(login: LoginModel): Promise<UsuarioModel> {
+        const response = await fetch('http://localhost:5215/api/authentication/login', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(login)
+        });
 
-        const usuario = usuarios.find(x => x.email === login.email && x.senha === login.senha);
-        if (!usuario) {
-            throw new Error('Usuário ou senha inválidos');
+        if (!response.ok) {
+            throw new Error(await response.text());
         }
 
-        return usuario;
+        return await response.json();
+
+
+
+        // const usuarios = JSON.parse(localStorage.getItem('usuarios') ?? "[]") as LoginModel[];
+
+        // const usuario = usuarios.find(x => x.email === login.email && x.senha === login.senha);
+        // if (!usuario) {
+        //     throw new Error('Usuário ou senha inválidos');
+        // }
+
+        // return usuario;
     }
 
-    async cadastrar(cadastro: CadastroInicial) {
-        const usuarios = JSON.parse(localStorage.getItem('usuarios') ?? "[]") as UsuarioModel[];
+    async cadastrar(cadastro: CadastroInicial): Promise<UsuarioModel> {
+        const response = await fetch('http://localhost:5215/api/authentication/cadastrar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(cadastro)
+        });
 
-        const usuario: UsuarioModel = {
-            id: usuarios.length + 1,
-            ...cadastro
-        };
+        if (!response.ok) {
+            throw new Error(await response.text());
+        }
 
-        usuarios.push(usuario);
+        return await response.json();
 
-        localStorage.setItem('usuarios', JSON.stringify(usuarios));
+        // const usuarios = JSON.parse(localStorage.getItem('usuarios') ?? "[]") as UsuarioModel[];
 
-        return usuario;
+        // const usuario: UsuarioModel = {
+        //     id: usuarios.length + 1,
+        //     ...cadastro
+        // };
+
+        // usuarios.push(usuario);
+
+        // localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+        // return usuario;
     }
 
     async atualizarDados(usuario: UsuarioModel) {
@@ -66,5 +96,5 @@ export interface UsuarioModel {
     nome: string;
     email: string;
     senha: string;
-    contato: any;
+    contato: string;
 }
