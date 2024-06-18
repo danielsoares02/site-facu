@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AnuncioCardComponent } from '../../components/anuncio-card/anuncio-card.component';
 import { ApiAnunciosService, AnuncioModel } from '../../api/api-anuncios.service';
 
@@ -12,11 +12,11 @@ import { ApiAnunciosService, AnuncioModel } from '../../api/api-anuncios.service
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class MeusAnunciosComponent implements OnInit {
-    anuncioService = inject(ApiAnunciosService);
     meusAnunciosList = signal(new Array<AnuncioModel>());
+
+    anuncioService = inject(ApiAnunciosService);
 
     async ngOnInit() {
         this.meusAnunciosList.set(await this.anuncioService.getMeusAnuncios());
     }
-
 }

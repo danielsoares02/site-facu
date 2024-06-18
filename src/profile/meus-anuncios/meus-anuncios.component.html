@@ -5,7 +5,7 @@
 
     <div class="d-flex flex-row flex-wrap">
         @for (anuncio of meusAnunciosList(); track $index) {
-        <div class="product-card">
+        <div class="product-card" [routerLink]="'/profile/meus-anuncios/' + anuncio.id">
             <app-anuncio-card [anuncio]="anuncio" />
         </div>
         }

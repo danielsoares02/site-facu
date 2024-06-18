@@ -1,33 +1,41 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ApiAnunciosService } from '../../../api/api-anuncios.service';
+import { AnuncioModel, ApiAnunciosService, NovoAnuncioModel } from '../../../api/api-anuncios.service';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-novo-anuncio',
+    selector: 'app-cadastro-anuncio',
     standalone: true,
     imports: [FormsModule],
-    templateUrl: './novo-anuncio.component.html',
-    styleUrl: './novo-anuncio.component.css',
+    templateUrl: './cadastro-anuncio.component.html',
+    styleUrl: './cadastro-anuncio.component.css',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export default class NovoAnuncioComponent {
-    titulo = signal("")
-    descricao = signal("")
-    valor = signal(0)
+export default class CadastroAnuncioComponent implements OnInit {
+    id = input(0)
+    
+    titulo = signal('')
+    anuncio = signal<NovoAnuncioModel>({ titulo: '', descricao: '', imagem: '' });
 
     anuncioService = inject(ApiAnunciosService);
     router = inject(Router);
+
+    async ngOnInit() {
+        if (this.id()) {
+            this.titulo.set("Editar anúncio")
+            this.anuncio.set(await this.anuncioService.getAnuncio(this.id()));
+        } else {
+            this.titulo.set("Novo anúncio")
+        }
+    }
     
     async confirm(inputTitulo: HTMLInputElement, inputDescricao: HTMLTextAreaElement, inputImage: HTMLInputElement) {
         if (inputTitulo.reportValidity() && inputDescricao.reportValidity() && inputImage.reportValidity()) {
             
             try {
-                await this.anuncioService.createAnuncio({
-                    titulo: this.titulo(),
-                    descricao: this.descricao(),
-                    imagem: await toBase64(inputImage.files![0])
-                });
+                this.anuncio().imagem = await toBase64(inputImage.files![0]);
+
+                await this.anuncioService.createAnuncio(this.anuncio());
                 
                 alert("Anúncio criado com sucesso!");
                 this.router.navigateByUrl('/profile/meus-anuncios');

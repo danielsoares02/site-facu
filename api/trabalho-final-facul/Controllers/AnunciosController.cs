@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 [ApiController]
 [Route("api/[controller]")]
 public class AnunciosController(IDbContextFactory<DBContext> DBContextFactory) {
+    
     [HttpPost]
     public async Task<IActionResult> Cadastrar([FromBody] Anuncio anuncio) {
         using (var db = DBContextFactory.CreateDbContext()) {
@@ -14,14 +15,14 @@ public class AnunciosController(IDbContextFactory<DBContext> DBContextFactory) {
     }
 
     [HttpGet]
-    public async Task<IActionResult> Listar([FromQuery] string pesquisa) {
+    public async Task<IActionResult> Listar([FromQuery] string pesquisa = "") {
         using (var db = DBContextFactory.CreateDbContext()) {
             var anuncios = await db.Anuncios.Where(a => string.IsNullOrEmpty(pesquisa) || a.Titulo.Contains(pesquisa)).ToListAsync();
             return new OkObjectResult(anuncios);
         }
     }
 
-    [HttpGet(":id")]
+    [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id) {
         using (var db = DBContextFactory.CreateDbContext()) {
             var anuncio = await db.Anuncios.FirstOrDefaultAsync(a => a.Id == id);
@@ -32,7 +33,7 @@ public class AnunciosController(IDbContextFactory<DBContext> DBContextFactory) {
         }
     }
     
-    [HttpDelete(":id")]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> Deletar(int id) {
         using (var db = DBContextFactory.CreateDbContext()) {
             var anuncio = await db.Anuncios.FirstOrDefaultAsync(a => a.Id == id);
@@ -59,7 +60,7 @@ public class AnunciosController(IDbContextFactory<DBContext> DBContextFactory) {
         return new OkObjectResult(anuncio);
     }
 
-    [HttpGet("usuario/:id")]
+    [HttpGet("usuario/{id}")]
     public async Task<IActionResult> ListarPorUsuario(int id) {
         using (var db = DBContextFactory.CreateDbContext()) {
             var anuncios = await db.Anuncios.Where(a => a.Anunciante == id).ToListAsync();

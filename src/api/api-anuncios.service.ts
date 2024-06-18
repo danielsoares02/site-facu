@@ -9,6 +9,11 @@ export class ApiAnunciosService {
     
     async getAnuncio(anuncioId: number): Promise<AnuncioModel> {
         const response = await fetch(`http://localhost:5215/api/anuncios/${anuncioId}`);
+
+        if (!response.ok) {
+            throw new Error(await response.text());
+        }
+
         return await response.json();
 
 
@@ -25,7 +30,12 @@ export class ApiAnunciosService {
     }
 
     async getAnuncios(pesquisa?: string) {
-        const response = await fetch(`http://localhost:5215/api/anuncios?pesquisa${pesquisa}`);
+        const response = await fetch(`http://localhost:5215/api/anuncios?pesquisa=${pesquisa}`);
+
+        if (!response.ok) {
+            throw new Error(await response.text());
+        }
+
         const anuncios = await response.json();
 
         return anuncios;
@@ -39,10 +49,10 @@ export class ApiAnunciosService {
         // return anuncios;
     }
 
-    async createAnuncio(novoAnuncio: Omit<AnuncioModel, "id" | "anunciante">) {
-        const anuncio: AnuncioModel = {
+    async createAnuncio(novoAnuncio: NovoAnuncioModel) {
+        const anuncio: NovoAnuncioModel = {
             ...novoAnuncio,
-            anunciante: this.loginService.usuarioLogado().id
+            // anunciante: this.loginService.usuarioLogado().id
         };
 
         const response = await fetch('http://localhost:5215/api/anuncios', {
@@ -71,19 +81,45 @@ export class ApiAnunciosService {
         // localStorage.setItem('anuncios', JSON.stringify(anuncios));
     }
 
+    async atualizarAnuncio(anuncio: AnuncioModel) {
+        const response = await fetch(`http://localhost:5215/api/anuncios`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(anuncio)
+        });
+
+        if (!response.ok) {
+            throw new Error(await response.text());
+        }
+
+        return await response.json();
+    }
+
     async getMeusAnuncios() {
         const response = await fetch(`http://localhost:5215/api/anuncios/usuario/${this.loginService.usuarioLogado().id}`);
-        return await response.json();
+
+        if (!response.ok) {
+            throw new Error(await response.text());
+        }
+
+        const anuncios = await response.json();
+
+        return anuncios;
         // const usuarioLogado = this.loginService.usuarioLogado();
         // return JSON.parse(localStorage.getItem('anuncios') || '[]').filter((anuncio: AnuncioModel) => anuncio.anunciante === usuarioLogado.id) as AnuncioModel[];
     }
 
 }
 
+
 export interface AnuncioModel {
-    id?: number;
+    id: number;
+    anunciante: number;
     titulo: string;
     descricao: string;
     imagem: string,
-    anunciante: number;
 }
+
+export type NovoAnuncioModel = Omit<AnuncioModel, 'id' | 'anunciante'>;

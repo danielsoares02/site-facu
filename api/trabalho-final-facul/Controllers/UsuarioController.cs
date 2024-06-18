@@ -19,7 +19,7 @@ public class UsuarioController(IDbContextFactory<DBContext> DBContextFactory)
         return new OkObjectResult(usuario);
     }
 
-    [HttpGet(":id")]
+    [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id)
     {
         using (var db = DBContextFactory.CreateDbContext())

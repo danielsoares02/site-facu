@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { LoginService } from '../../auth/services/login.service';
+import { UsuarioModel } from '../../api/api-usuario.service';
 
 @Component({
     selector: 'app-profile.layout',
@@ -11,9 +12,9 @@ import { LoginService } from '../../auth/services/login.service';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class ProfileLayoutComponent {
-    
     loginService = inject(LoginService)
     router = inject(Router);
+    usuario = signal(this.loginService.usuarioLogado())
 
     async sair() {
         this.loginService.logout();

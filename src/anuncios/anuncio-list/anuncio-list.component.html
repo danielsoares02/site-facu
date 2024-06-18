@@ -1,6 +1,6 @@
 <div class="d-flex flex-row flex-wrap justify-content-center">
     @for (anuncio of anuncioList(); track $index) {
-    <div class="product-card" role="button" [routerLink]="'/anuncios/detail/' + anuncio.id">
+    <div class="product-card" role="button" [routerLink]="'/anuncios/' + anuncio.id">
         <app-anuncio-card [anuncio]="anuncio" />
     </div>
     }
