@@ -32,4 +32,18 @@ public class UsuarioController(IDbContextFactory<DBContext> DBContextFactory)
             return new OkObjectResult(usuario);
         }
     }
+
+    [HttpPut("feedback")]
+    public async Task<IActionResult> Feedback([FromBody] string mensagem)
+    {
+        using (var db = DBContextFactory.CreateDbContext())
+        {
+            db.Feedbacks.Add(new Feedback {
+                Mensagem = mensagem
+            });
+            await db.SaveChangesAsync();
+        }
+
+        return new OkResult();
+    }
 }

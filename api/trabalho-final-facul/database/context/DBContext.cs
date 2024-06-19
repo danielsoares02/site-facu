@@ -4,6 +4,7 @@ public class DBContext : DbContext
 {
     public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Anuncio> Anuncios { get; set; }
+    public DbSet<Feedback> Feedbacks { get; set; }
 
     public DBContext(DbContextOptions<DBContext> options) : base(options) { }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

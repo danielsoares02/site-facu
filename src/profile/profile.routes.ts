@@ -6,6 +6,7 @@ export const profileRoutes: Routes = [
             { path: 'meus-dados', loadComponent: () => import('./meus-dados/meus-dados.component') },
             { path: 'meus-anuncios', loadComponent: () => import('./meus-anuncios/meus-anuncios.component') },
             { path: 'meus-anuncios/:id', loadComponent: () => import('./meus-anuncios/cadastro-anuncio/cadastro-anuncio.component') },
+            { path: 'feedback', loadComponent: () => import('./feedback/feedback.component') },
             { path: '**', redirectTo: 'meus-anuncios' }
         ]
     }

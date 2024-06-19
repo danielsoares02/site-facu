@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
     providedIn: 'root'
 })
 export class ApiUsuarioService {
+    
     async login(login: LoginModel): Promise<UsuarioModel> {
         const response = await fetch('http://localhost:5215/api/authentication/login', {
             method: 'PUT',
@@ -104,6 +105,20 @@ export class ApiUsuarioService {
         // }
 
         // return usuario;
+    }
+
+    async sendFeedback(value: string) {
+        const response = await fetch(`http://localhost:5215/api/usuario/feedback`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(value)
+        });
+
+        if (!response.ok) {
+            throw new Error(await response.text());
+        }
     }
 }
 
