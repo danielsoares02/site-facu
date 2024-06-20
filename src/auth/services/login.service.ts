@@ -17,11 +17,11 @@ export class LoginService {
     }
 
     logout() {
-        localStorage.removeItem('login');
+        localStorage.clear();
     }
 
     isLogged() {
-        return !!localStorage.getItem('login');
+        return !!localStorage.getItem('token');
     }
 
     usuarioLogado(): UsuarioModel {

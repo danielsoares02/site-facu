@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ApiConfig } from './api-config';
 
 @Injectable({
     providedIn: 'root'
@@ -18,18 +19,9 @@ export class ApiUsuarioService {
             throw new Error(await response.text());
         }
 
+        localStorage.setItem('token', response.headers.get('Authorization') ?? "");
+
         return await response.json();
-
-
-
-        // const usuarios = JSON.parse(localStorage.getItem('usuarios') ?? "[]") as LoginModel[];
-
-        // const usuario = usuarios.find(x => x.email === login.email && x.senha === login.senha);
-        // if (!usuario) {
-        //     throw new Error('Usuário ou senha inválidos');
-        // }
-
-        // return usuario;
     }
 
     async cadastrar(cadastro: CadastroInicial): Promise<UsuarioModel> {
@@ -45,27 +37,19 @@ export class ApiUsuarioService {
             throw new Error(await response.text());
         }
 
+        localStorage.setItem('token', response.headers.get('Authorization') ?? "");
+
         return await response.json();
-
-        // const usuarios = JSON.parse(localStorage.getItem('usuarios') ?? "[]") as UsuarioModel[];
-
-        // const usuario: UsuarioModel = {
-        //     id: usuarios.length + 1,
-        //     ...cadastro
-        // };
-
-        // usuarios.push(usuario);
-
-        // localStorage.setItem('usuarios', JSON.stringify(usuarios));
-
-        // return usuario;
     }
 
     async atualizarDados(usuario: UsuarioModel) {
+        const currentToken = localStorage.getItem('token');
+
         const response = await fetch(`http://localhost:5215/api/usuario`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': currentToken ?? ''
             },
             body: JSON.stringify(usuario)
         });
@@ -75,43 +59,33 @@ export class ApiUsuarioService {
         }
 
         return await response.json();
-
-
-        // let usuarios = JSON.parse(localStorage.getItem('usuarios') ?? "[]") as UsuarioModel[];
-
-        // usuarios = usuarios.filter(x => x.id !== usuario.id);
-        // usuarios.push(usuario)
-
-        // localStorage.setItem('usuarios', JSON.stringify(usuarios));
-
-        // return usuario;
     }
 
     
     async getUsuario(id: number): Promise<UsuarioModel> {
-        const response = await fetch(`http://localhost:5215/api/usuario/${id}`);
+        const currentToken = localStorage.getItem('token');
+
+        const response = await fetch(`http://localhost:5215/api/usuario/${id}`, {
+            headers: {
+                'Authorization': currentToken ?? '',
+            }
+        });
 
         if (!response.ok) {
             throw new Error(await response.text());
         }
 
         return await response.json();
-        
-        // const usuarios = JSON.parse(localStorage.getItem('usuarios') ?? "[]") as UsuarioModel[];
-
-        // const usuario = usuarios.find(x => x.id === id);
-        // if (!usuario) {
-        //     throw new Error('Usuário não encontrado');
-        // }
-
-        // return usuario;
     }
 
     async sendFeedback(value: string) {
+        const currentToken = localStorage.getItem('token');
+
         const response = await fetch(`http://localhost:5215/api/usuario/feedback`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': currentToken ?? '',
             },
             body: JSON.stringify(value)
         });

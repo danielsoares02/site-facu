@@ -1,3 +1,3 @@
 export const ApiConfig = {
-    url: 'http://localhost:5215'
+    url: 'http://localhost:5215',
 }

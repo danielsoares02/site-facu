@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.Authorization;
+
 [ApiController]
+[Authorize]
 [Route("api/[controller]")]
 public class UsuarioController(IDbContextFactory<DBContext> DBContextFactory)
 {

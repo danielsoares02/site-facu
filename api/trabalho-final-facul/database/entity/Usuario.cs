@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 public class Usuario
 {
@@ -8,6 +9,7 @@ public class Usuario
     [Required]
     public string Email { get; set; } = "";
     [Required]
+    [JsonIgnore]
     public string Senha { get; set; } = "";
     public string Contato { get; set; } = "";
 }

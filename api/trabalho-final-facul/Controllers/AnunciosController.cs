@@ -1,10 +1,11 @@
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
 [Route("api/[controller]")]
 public class AnunciosController(IDbContextFactory<DBContext> DBContextFactory) {
     
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> Cadastrar([FromBody] Anuncio anuncio) {
         using (var db = DBContextFactory.CreateDbContext()) {
             db.Anuncios.Add(anuncio);
@@ -34,6 +35,7 @@ public class AnunciosController(IDbContextFactory<DBContext> DBContextFactory) {
     }
     
     [HttpDelete("{id}")]
+    [Authorize]
     public async Task<IActionResult> Deletar(int id) {
         using (var db = DBContextFactory.CreateDbContext()) {
             var anuncio = await db.Anuncios.FirstOrDefaultAsync(a => a.Id == id);
@@ -47,6 +49,7 @@ public class AnunciosController(IDbContextFactory<DBContext> DBContextFactory) {
     }
 
     [HttpPut]
+    [Authorize]
     public async Task<IActionResult> Atualizar([FromBody] Anuncio anuncio) {
         if (anuncio.Id == 0) {
             return new BadRequestObjectResult("Id do anúncio não informado");
@@ -61,6 +64,7 @@ public class AnunciosController(IDbContextFactory<DBContext> DBContextFactory) {
     }
 
     [HttpGet("usuario/{id}")]
+    [Authorize]
     public async Task<IActionResult> ListarPorUsuario(int id) {
         using (var db = DBContextFactory.CreateDbContext()) {
             var anuncios = await db.Anuncios.Where(a => a.Anunciante == id).ToListAsync();
