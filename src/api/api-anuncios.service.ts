@@ -86,7 +86,7 @@ export class ApiAnunciosService {
     async getMeusAnuncios() {
         const currentToken = localStorage.getItem('token');
 
-        const response = await fetch(`http://localhost:5215/api/anuncios/usuario/${this.loginService.usuarioLogado().id}`, {
+        const response = await fetch(`http://localhost:5215/api/anuncios/usuario`, {
             headers: {
                 'Authorization': currentToken ?? '',
             }
