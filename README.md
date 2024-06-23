@@ -1,27 +1,13 @@
-# TrabalhoFacu
+# Site para publicação de produtos e serviços
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
+Este projeto é um protótipo de web-site para publicação de produtos e serviços, o front-end foi desenvolvido em Angular e o Back-End foi desenvolvido em dotnet core 8.
 
-## Development server
+Para iniciar o front-end execute `npm start` e acesse o endereço http://localhost:4200;
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Para compilar uma nova versão execute `npm run build`, a aplicação será compilada para a pasta `docs`.
 
-## Code scaffolding
+A API se encontra na pasta `api/trabalho-final-facul`, compile-a com `dotnet build` ou e execute-a com `dotnet run`.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+É necessario criar o banco de dados em sqlite usando os comandos `dotnet tool install --global dotnet-ef` e `dotnet ef database update`.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+O front-end no momento está configurado para acessar a API no endereço `https://becoming-glowworm-huge.ngrok-free.app`, altere essa configuração no arquivo `\src\api\api-config.ts` 
