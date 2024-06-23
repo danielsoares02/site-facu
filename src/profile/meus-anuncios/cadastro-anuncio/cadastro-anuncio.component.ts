@@ -31,7 +31,12 @@ export default class CadastroAnuncioComponent implements OnInit {
     
     async confirm(inputTitulo: HTMLInputElement, inputDescricao: HTMLTextAreaElement, inputImage: HTMLInputElement) {
         if (inputTitulo.reportValidity() && inputDescricao.reportValidity() && inputImage.reportValidity()) {
-            
+           
+            if (inputImage.files![0].size > 1024 * 1024 * 2){ // 2mb
+                alert("Imagem muito grande! Tamanho máximo de 2mb.");
+                return;
+            }
+
             try {
                 this.anuncio().imagem = await toBase64(inputImage.files![0]);
 

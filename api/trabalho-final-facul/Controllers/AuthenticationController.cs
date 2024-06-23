@@ -22,6 +22,7 @@ public class AuthenticationController(IDbContextFactory<DBContext> DBContextFact
 
         this.HttpContext.Response.Headers.Authorization = "Bearer " + tokenString;
         
+        usuario.Senha = null;
         return usuario;
     }
 
@@ -40,6 +41,8 @@ public class AuthenticationController(IDbContextFactory<DBContext> DBContextFact
             var tokenString = GenerateJwtToken(usuario);
 
             this.HttpContext.Response.Headers.Authorization = "Bearer " + tokenString;
+            
+            usuario.Senha = null;
             return new OkObjectResult(usuario);
         }
     }

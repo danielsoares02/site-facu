@@ -1,8 +1,9 @@
-<div class="d-flex flex-column justify-content-evenly">
+<div class="d-flex flex-column justify-content-evenly p-3">
     <div class="w-100 text-end">
         <a [routerLink]="['novo-anuncio']">Novo Anúncio</a>
     </div>
 
+    <h2>Meus anúncios</h2>
     <div class="d-flex flex-row flex-wrap">
         @for (anuncio of meusAnunciosList(); track $index) {
         <div class="product-card" [routerLink]="'/profile/meus-anuncios/' + anuncio.id">

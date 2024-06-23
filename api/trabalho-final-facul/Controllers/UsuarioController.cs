@@ -41,6 +41,7 @@ public class UsuarioController(IDbContextFactory<DBContext> DBContextFactory) : 
             db.Usuarios.Update(usuarioBanco);
             await db.SaveChangesAsync();
 
+            usuarioBanco.Senha = null;
             return new OkObjectResult(usuarioBanco);
         }
     }
@@ -56,6 +57,8 @@ public class UsuarioController(IDbContextFactory<DBContext> DBContextFactory) : 
             {
                 return new NotFoundObjectResult("Usuário não encontrado");
             }
+
+            usuario.Senha = null;
             return new OkObjectResult(usuario);
         }
     }

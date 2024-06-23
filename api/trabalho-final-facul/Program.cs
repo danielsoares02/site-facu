@@ -49,9 +49,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-
 // Use o middleware de CORS
 app.UseCors();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    OnPrepareResponse = ctx =>
+    {
+        ctx.Context.Response.Headers.Append("Cache-Control", "public, max-age=31536000, immutable");
+    }
+});
 
 app.UseAuthentication();
 app.UseAuthorization();
