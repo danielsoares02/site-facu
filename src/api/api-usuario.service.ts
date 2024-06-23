@@ -5,9 +5,9 @@ import { ApiConfig } from './api-config';
     providedIn: 'root'
 })
 export class ApiUsuarioService {
-    
+
     async login(login: LoginModel): Promise<UsuarioModel> {
-        const response = await fetch('${ApiConfig.url}/api/authentication/login', {
+        const response = await fetch(`${ApiConfig.url}/api/authentication/login`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -25,7 +25,7 @@ export class ApiUsuarioService {
     }
 
     async cadastrar(cadastro: CadastroInicial): Promise<UsuarioModel> {
-        const response = await fetch('${ApiConfig.url}/api/authentication/cadastrar', {
+        const response = await fetch(`${ApiConfig.url}/api/authentication/cadastrar`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -61,7 +61,7 @@ export class ApiUsuarioService {
         return await response.json();
     }
 
-    
+
     async getUsuario(id: number): Promise<UsuarioModel> {
         const currentToken = localStorage.getItem('token');
 

@@ -7,7 +7,7 @@ import { ApiConfig } from './api-config';
 })
 export class ApiAnunciosService {
     loginService = inject(LoginService);
-    
+
     async getAnuncio(anuncioId: number): Promise<AnuncioModel> {
         const currentToken = localStorage.getItem('token');
 
@@ -49,7 +49,7 @@ export class ApiAnunciosService {
             ...novoAnuncio,
         };
 
-        const response = await fetch('${ApiConfig.url}/api/anuncios', {
+        const response = await fetch(`${ApiConfig.url}/api/anuncios`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ export class ApiAnunciosService {
             },
             body: JSON.stringify(anuncio)
         });
-        
+
         if (!response.ok) {
             throw new Error(await response.text());
         }
