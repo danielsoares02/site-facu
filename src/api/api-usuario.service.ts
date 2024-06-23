@@ -7,7 +7,7 @@ import { ApiConfig } from './api-config';
 export class ApiUsuarioService {
     
     async login(login: LoginModel): Promise<UsuarioModel> {
-        const response = await fetch('http://localhost:5215/api/authentication/login', {
+        const response = await fetch('${ApiConfig.url}/api/authentication/login', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -25,7 +25,7 @@ export class ApiUsuarioService {
     }
 
     async cadastrar(cadastro: CadastroInicial): Promise<UsuarioModel> {
-        const response = await fetch('http://localhost:5215/api/authentication/cadastrar', {
+        const response = await fetch('${ApiConfig.url}/api/authentication/cadastrar', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ export class ApiUsuarioService {
     async atualizarDados(usuario: UsuarioModel) {
         const currentToken = localStorage.getItem('token');
 
-        const response = await fetch(`http://localhost:5215/api/usuario`, {
+        const response = await fetch(`${ApiConfig.url}/api/usuario`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ export class ApiUsuarioService {
     async getUsuario(id: number): Promise<UsuarioModel> {
         const currentToken = localStorage.getItem('token');
 
-        const response = await fetch(`http://localhost:5215/api/usuario/${id}`, {
+        const response = await fetch(`${ApiConfig.url}/api/usuario/${id}`, {
             headers: {
                 'Authorization': currentToken ?? '',
             }
@@ -81,7 +81,7 @@ export class ApiUsuarioService {
     async sendFeedback(value: string) {
         const currentToken = localStorage.getItem('token');
 
-        const response = await fetch(`http://localhost:5215/api/usuario/feedback`, {
+        const response = await fetch(`${ApiConfig.url}/api/usuario/feedback`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

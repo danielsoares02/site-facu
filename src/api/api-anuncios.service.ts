@@ -1,5 +1,6 @@
 import { inject, Injectable, InputSignal } from '@angular/core';
 import { LoginService } from '../auth/services/login.service';
+import { ApiConfig } from './api-config';
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +11,7 @@ export class ApiAnunciosService {
     async getAnuncio(anuncioId: number): Promise<AnuncioModel> {
         const currentToken = localStorage.getItem('token');
 
-        const response = await fetch(`http://localhost:5215/api/anuncios/${anuncioId}`, {
+        const response = await fetch(`${ApiConfig.url}/api/anuncios/${anuncioId}`, {
             headers: {
                 'Authorization': currentToken ?? '',
             }
@@ -26,7 +27,7 @@ export class ApiAnunciosService {
     async getAnuncios(pesquisa?: string) {
         const currentToken = localStorage.getItem('token');
 
-        const response = await fetch(`http://localhost:5215/api/anuncios?pesquisa=${pesquisa}`, {
+        const response = await fetch(`${ApiConfig.url}/api/anuncios?pesquisa=${pesquisa}`, {
             headers: {
                 'Authorization': currentToken ?? '',
             }
@@ -48,7 +49,7 @@ export class ApiAnunciosService {
             ...novoAnuncio,
         };
 
-        const response = await fetch('http://localhost:5215/api/anuncios', {
+        const response = await fetch('${ApiConfig.url}/api/anuncios', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -67,7 +68,7 @@ export class ApiAnunciosService {
     async atualizarAnuncio(anuncio: AnuncioModel) {
         const currentToken = localStorage.getItem('token');
 
-        const response = await fetch(`http://localhost:5215/api/anuncios`, {
+        const response = await fetch(`${ApiConfig.url}/api/anuncios`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -86,7 +87,7 @@ export class ApiAnunciosService {
     async getMeusAnuncios() {
         const currentToken = localStorage.getItem('token');
 
-        const response = await fetch(`http://localhost:5215/api/anuncios/usuario`, {
+        const response = await fetch(`${ApiConfig.url}/api/anuncios/usuario`, {
             headers: {
                 'Authorization': currentToken ?? '',
             }
