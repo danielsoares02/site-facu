@@ -6,7 +6,7 @@ Para iniciar o front-end execute `npm start` e acesse o endereço http://localho
 
 Para compilar uma nova versão execute `npm run build`, a aplicação será compilada para a pasta `docs`.
 
-A API se encontra na pasta `api/trabalho-final-facul`, compile-a com `dotnet build` ou e execute-a com `dotnet run`.
+A API se encontra na pasta `api/site-facu`, compile-a com `dotnet build` ou e execute-a com `dotnet run`.
 
 É necessario criar o banco de dados em sqlite usando os comandos `dotnet tool install --global dotnet-ef` e `dotnet ef database update`.
 

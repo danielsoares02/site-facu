@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "trabalho-facu": {
+    "site-facu": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -59,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "trabalho-facu:build:production"
+              "buildTarget": "site-facu:build:production"
             },
             "development": {
-              "buildTarget": "trabalho-facu:build:development"
+              "buildTarget": "site-facu:build:development"
             }
           },
           "defaultConfiguration": "development"
